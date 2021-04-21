@@ -1,0 +1,45 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "brcm,bcm2835";
+	/* set up IRQ line */
+	fragment@0 {
+		target = <&gpio>;
+		__overlay__ {
+			irq_gpio {
+				brcm,pins 	= <26>;
+				brcm,function 	= <0>; 		// pin26 input
+				brcm,pull	= <2>; 		// pin 26 pull-up
+				
+			};
+		};
+	};
+
+	/* set up LED output */
+	fragment@1 {
+		target = <&gpio>;
+		__overlay__ {
+			led_gpio {
+				brcm,pins 	= <16>;
+				brcm,function 	= <1>;		//pin 16 output
+				brcm,pull	= <0>;		//pin 16 nothing
+			};
+		};
+	};
+
+	/* create new device */
+	fragment@2 {
+		target-path = "/";
+		__overlay__ {
+			irq_led_ctrl {
+				compatible ="irq-control";
+				interrupt-parent = <&gpio>;
+				interrupts = <26 8>;
+				ctrl-gpios = <&gpio 16 0>,
+					     <&gpio 26 0>;
+				status = "okay";
+			};
+		};
+	};
+};
