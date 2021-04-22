@@ -1,0 +1,2 @@
+This arduino sketch will trigger interrupt on Raspberry pi's GPIO 26 every second.
+If LED is connected like in schematic, it will blink with frequency 1Hz.

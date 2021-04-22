@@ -1,9 +1,14 @@
 Registers IRQ line on GPIO, and turns on led on interrupt.
- 
-  _+3.3V			  _ GPIO16
+
++3.3V                           GPIO16
+  V     			  V 
   |				  |	
   |				  |
- \. (switch)			  O LED
+ \. (switch)			 <O> LED
   |				  |
   |				  |
+  V				  V
 GPIO21				 GND
+
+
+
